@@ -1,0 +1,67 @@
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="213E43F3-090C-4021-8D05-3D8EE79D7D31" UpgradeCode="69D44AC0-A5A1-45AF-97E0-6DFA4C06B5D2" Version="1.0.0.0" Name="EXEMSI Extractor" Manufacturer="Zohan Haque" Language="1033">
+    <Package InstallerVersion="405" InstallScope="perMachine" InstallPrivileges="elevated" Compressed="yes" Manufacturer="Zohan Haque" />
+    <Media Cabinet="media1.cab" Id="1" EmbedCab="yes" />
+    <Icon Id="MyIcon" SourceFile="Py\icon.ico" />
+    <WixVariable Id="WixUILicenseRtf" Value="LS.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="EXEMSIExtractorWIZ\wizard.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="EXEMSIExtractorWIZ\header.bmp" />
+    <Property Id="ARPPRODUCTICON" Value="MyIcon" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="MenuAppFolder" Name="TheAppName" />
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="MyAppFolder" Name="EXEMSI Extractor" />
+      </Directory>
+    </Directory>
+    <ComponentGroup Id="RemoveFolders">
+      <ComponentRef Id="Remove.MenuAppFolder" />
+      <ComponentRef Id="Remove.ProgramFilesFolder" />
+    </ComponentGroup>
+    <ComponentGroup Id="exemsi">
+      <ComponentRef Id="CSCId462138A3" />
+      <ComponentRef Id="CSCId12499856" />
+      <ComponentRef Id="CId91E022D5" />
+    </ComponentGroup>
+    <Feature Id="ProductFeature" Title="exemsi extractor" Description="extract msi and exe files.">
+      <ComponentGroupRef Id="RemoveFolders" />
+      <ComponentGroupRef Id="exemsi" />
+    </Feature>
+    <UIRef Id="WixUI_FeatureTree" />
+    <DirectoryRef Id="ProgramFilesFolder">
+      <Component Id="Remove.ProgramFilesFolder" Guid="1255FA83-B0AC-4806-AFF4-6380A32FFE53">
+        <RemoveFolder Id="ProgramFilesFolder" On="uninstall" />
+        <RegistryValue Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="MyAppFolder">
+      <Component Id="CId91E022D5" Guid="B5588C98-D573-4A2C-86BC-F3C9F8121E4C" Win64="no">
+        <File Id="FId2169A5A6" Name="EXEMSIDecompiler.exe" Source="C:\Users\zohan\Downloads\py\dist\" />
+        <CreateFolder />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="TARGETDIR" />
+    <DirectoryRef Id="ProgramMenuFolder">
+      <Component Id="CSCId462138A3" Guid="A5F7B634-1518-4B82-8FFF-C9A0F599DE65">
+        <Shortcut Id="SIdC732B31A" Name="EXEMSI Extractor" Target="[!FId2169A5A6]" WorkingDirectory="MyAppFolder" Icon="MyIcon" />
+        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        <RemoveFolder Id="CSCId462138A3" On="uninstall" Directory="ProgramMenuFolder" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="MenuAppFolder">
+      <Component Id="Remove.MenuAppFolder" Guid="3C7C5F3B-B5AF-4241-924E-ECD5250458E5">
+        <RemoveFolder Id="MenuAppFolder" On="uninstall" />
+        <RegistryValue Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="CSCId12499856" Guid="496FC681-838A-4371-B3F0-4C5537BC702B">
+        <Shortcut Id="SId4CD91916" Name="EXEMSI Extractor" Description="extract msi and exe files" Target="[!FId2169A5A6]" WorkingDirectory="MyAppFolder" Icon="MyIcon" />
+        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        <RemoveFolder Id="CSCId12499856" On="uninstall" Directory="DesktopFolder" />
+      </Component>
+    </DirectoryRef>
+  </Product>
+</Wix>
