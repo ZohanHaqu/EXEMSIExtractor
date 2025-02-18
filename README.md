@@ -1,6 +1,6 @@
 # EXEMSIExtractor
 Overview
-EXEMSIExtractor is a Python-based application that helps extract the contents of executable (.exe) and Microsoft Installer (.msi) files by converting them into ZIP archives. This tool simplifies the process of accessing files contained within EXE or MSI installers without running the installer or worrying about Windows Explorer's inability to view the contents.
+EXEMSIExtractor is a Python-based application that helps extract the contents of executable (.exe) and Microsoft Installer (.msi) files by converting them into folders. This tool simplifies the process of accessing files contained within EXE or MSI installers without running the installer or worrying about Windows Explorer's inability to view the contents.
 
 Features:
 Extract EXE/MSI files: Supports extraction of both .exe and .msi files into accessible folders.
